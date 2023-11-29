@@ -5,3 +5,5 @@ google-cloud-firestore
 pytest
 pyrebase4
 pyparsing
+pytz
+python-dateutil

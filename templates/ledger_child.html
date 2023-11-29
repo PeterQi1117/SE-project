@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    {% include "bootstrap_links.html" %}
+    <title>Ledger</title>
+  </head>
+  <body>
+    <header>
+      {% if role == "parent" %} {% include "parent_navbar.html" %} {% elif role
+      == "facility-admin" %} {% include "admin_navbar.html" %} {% endif %}
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h1 class="text-center">Ledger for {{name}}</h1>
+          <b>Charges ({{number_of_weeks}} weeks since enrollment * cost per week of ${{cost}}):</b>
+          <p>${{charges}}</p>
+          <b>Payments:</b>
+          {% for payment in payments %}
+          <p>Date: {{ payment.date }}, Amount: ${{ payment.amount }}</p>
+          {% endfor %}
+          <b>Owed:</b>
+          <p>${{owed}}</p>
+
+          {% if role == "parent" %}
+          <form action="/make_payment" method="POST">
+            <div class="form-group">
+              <label for="amount">Payment Amount:</label>
+              <input
+                type="decimal"
+                class="form-control"
+                id="amount"
+                name="amount"
+                required
+              />
+              <input type="hidden" name="id" value="{{id}}" />
+            </div>
+            <button type="submit" class="btn btn-primary">Pay</button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

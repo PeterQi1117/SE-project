@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/static/css/style.css" />
+        {% include "bootstrap_links.html" %}
+        <title>Dashboard</title>
+
+        <script></script>
+    </head>
+    <body>
+        <header>{% include "parent_navbar.html" %}</header>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h2>Enrolled Children</h2>
+                    <ul class="list-group">
+                        {% for child in enrolled_children %}
+                        <li class="list-group-item">
+                            <p>
+                                {{ child.firstName }} {{ child.lastName }} - {{ child.dob }}
+                                ({{child.classification }})
+                            </p>
+
+                            <div>
+                            <button
+                                onclick="location.href='/ledger/{{child.id}}'"
+                                class="btn my-2"
+                            >
+                                Show Ledger
+                            </button>
+                            </div>
+                            <br />
+
+                            <div>
+                            <button
+                                onclick="location.href='/attendance/{{child.id}}/week/0'"
+                                class="btn my-2"
+                            >
+                                Attendance this week
+                            </button>
+
+                            <button
+                                onclick="location.href='/attendance/{{child.id}}/month/0'"
+                                class="btn my-2"
+                            >
+                                Attendance this month
+                            </button>
+
+                            </div> 
+
+                            <br />
+
+                            <button
+                                onclick="location.href='/enroll/edit/{{child.id}}'"
+                                class="btn my-2"
+                            >
+                                Edit Enrollment
+                            </button>
+
+                            <form action="/sign-in-out" method="POST" style="display: inline">
+                                <input type="hidden" name="id" value="{{child.id}}" />
+                                <button type="submit" class="btn my-2">
+                                    {{ child['sign-in-out-button'] }}
+                                </button>
+                            </form>
+                            
+                            <form action="/disenroll" method="POST" style="display: inline">
+                                <input type="hidden" name="id" value="{{child.id}}" />
+                                <button type="submit" class="btn btn-danger my-2">Withdraw</button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://www.gstatic.com/firebasejs/8.0/firebase.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyBEc3NzCZIRLnbwJNs-l2IkfRAiWIqICFU",
+            authDomain: "se-project-406614.firebaseapp.com",
+        };
+        firebase.initializeApp(config);
+    </script>
+</html>

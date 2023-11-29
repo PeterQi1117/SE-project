@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    {% include "bootstrap_links.html" %}
+    <title>Facility</title>
+  </head>
+  <body>
+    <header>
+        {% include "admin_navbar.html" %}
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h1>Facility</h1>
+          <form action="/facility" method="POST">
+            <div class="form-group">
+              <label for="facility-name">Facility Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="facility-name"
+                value="{{facility_data.facilityName}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="facility-address">Facility Address:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="facility-address"
+                value="{{facility_data.facilityAddress}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="facility-phone-number">Facility Phone Number:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="facility-phone-number"
+                value="{{facility_data.facilityPhoneNumber}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="facility-admin-name">Facility Admin Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="facility-admin-name"
+                value="{{facility_data.facilityAdminName}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="facility-admin-email">Facility Admin Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                name="facility-admin-email"
+                value="{{facility_data.facilityAdminEmail}}"
+                disabled
+              />
+            </div>
+            <div class="form-group">
+              <label for="facility-admin-contact"
+                >Facility Admin Contact:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="facility-admin-contact"
+                value="{{facility_data.facilityAdminContact}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="facility-license-number"
+                >Facility License Number:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="facility-license-number"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

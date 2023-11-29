@@ -1,0 +1,27 @@
+
+<button
+onclick="location.href='/attendance/{{id}}/{{type}}/{{offset - 1}}'"
+class="btn my-2"
+>
+Previous
+</button>
+
+{% if offset < 0 %}
+<button
+onclick="location.href='/attendance/{{id}}/{{type}}/{{offset + 1}}'"
+class="btn my-2"
+>
+Next
+</button>
+
+{% endif %} {% for episode in attendance %}
+
+<div class="form-group">
+{% if loop.index is odd %}
+<p>Arrived: {{ episode }}</p>
+{% else %}
+<p>Departed: {{ episode }}</p>
+{% endif %}
+</div>
+
+{% endfor %}

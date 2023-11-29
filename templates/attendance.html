@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    {% include "bootstrap_links.html" %}
+    <title>Ledger</title>
+  </head>
+  <body>
+    <header>
+      {% if role == "facility-admin" %} {% include "admin_navbar.html" %} {%
+      elif role == "parent" %} {% include "parent_navbar.html" %} {% else %} {%
+      include "teacher_navbar.html" %} {% endif %}
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h1 class="text-center">Attendance ({{type}}ly) for {{name}}</h1>
+          {% include "attendance_list.html" %} {% if role == "teacher" %}
+          <br />
+          <b>Salary Earned: </b>
+          <p>{{salaryEarned}}</p>
+          <b>Hours Worked: </b>
+          <p>{{hoursWorked}}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
