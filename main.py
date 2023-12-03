@@ -422,7 +422,7 @@ def enroll():
         enrolled_children = []
         waitlisted_children = []
 
-        enrollments = enrollments_collection.get()
+        enrollments = enrollments_collection.where("adminEmail", "==", adminEmail).get()
         for enrollment in enrollments:
             dict = enrollment.to_dict()
             if dict["enrolled"] == True:
@@ -598,7 +598,7 @@ def staff():
             return redirect("/staff")
 
         staff_data = []
-        staff = staff_collection.get()
+        staff = staff_collection.where("adminEmail", "==", adminEmail).get()
         for teacher in staff:
             staff_data.append({**teacher.to_dict(), "id": teacher.id})
 
